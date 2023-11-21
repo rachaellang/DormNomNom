@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DiningActivity">
+
+    <TextView
+        android:id="@+id/selectDiningHall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="30dp"
+        android:text="Select a dining hall to get started"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/rheta"
+        app:layout_constraintStart_toStartOf="@+id/gordon"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarDining" />
+
+    <ImageView
+        android:id="@+id/gordon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rheta"
+        app:layout_constraintEnd_toStartOf="@+id/rheta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rheta"
+        app:srcCompat="@drawable/gordon" />
+
+    <ImageView
+        android:id="@+id/rheta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/liz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gordon"
+        app:layout_constraintTop_toBottomOf="@+id/selectDiningHall"
+        app:srcCompat="@drawable/rheta_s" />
+
+    <ImageView
+        android:id="@+id/liz"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/carson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lowell"
+        app:layout_constraintTop_toBottomOf="@+id/rheta"
+        app:srcCompat="@drawable/liz_s" />
+
+    <ImageView
+        android:id="@+id/lowell"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/liz"
+        app:layout_constraintEnd_toStartOf="@+id/liz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/liz"
+        app:srcCompat="@drawable/lowell" />
+
+    <ImageView
+        android:id="@+id/carson"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fourlakes"
+        app:layout_constraintTop_toBottomOf="@+id/liz"
+        app:srcCompat="@drawable/carson_s" />
+
+    <ImageView
+        android:id="@+id/fourlakes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/carson"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DormNomNom"
+        app:srcCompat="@drawable/four_lakes" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarDining"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/selectDiningHall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DormNomNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="473dp"
+        android:text="DormNomNom"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fourlakes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
