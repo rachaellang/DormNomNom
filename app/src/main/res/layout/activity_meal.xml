@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#673AB7"
         android:orientation="horizontal"
@@ -48,24 +48,5 @@
 
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/verticalLayout"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="56dp">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        app:layout_constraintTop_toBottomOf="@id/verticalLayout"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="56dp"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
