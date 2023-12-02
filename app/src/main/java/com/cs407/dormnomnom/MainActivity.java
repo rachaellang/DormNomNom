@@ -27,12 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestLocationPermission();
-            }
-        });
+        button.setOnClickListener(v -> requestLocationPermission());
     }
 
     private void requestLocationPermission() {
@@ -77,19 +72,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Location Permission Required");
         builder.setMessage("To use this app, you need to grant location permission.");
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                requestLocationPermission();
-            }
-        });
+        builder.setPositiveButton("OK", (dialog, which) -> requestLocationPermission());
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Location permission is required.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> Toast.makeText(MainActivity.this, "Location permission is required.", Toast.LENGTH_SHORT).show());
 
         builder.create().show();
     }

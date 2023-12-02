@@ -13,6 +13,8 @@ public class MealActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal);
+
+        // home button handler
         ImageView homeIcon = findViewById(R.id.homeIcon);
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -20,10 +22,26 @@ public class MealActivity extends AppCompatActivity {
                 navigateToDiningActivity();
             }
         });
+
+        // back button handler
+        ImageView backMeal = findViewById(R.id.backMeal);
+        backMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { navigateToHallActivity(); }
+        });
     }
 
     private void navigateToDiningActivity() {
         Intent intent = new Intent(MealActivity.this, DiningActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * Guides user back to the Hall Activity they were just on
+     */
+    private void navigateToHallActivity() {
+        Intent intent = new Intent(MealActivity.this, HallActivity.class);
         startActivity(intent);
         finish();
     }
