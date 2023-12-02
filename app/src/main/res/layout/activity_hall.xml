@@ -58,7 +58,7 @@
         android:layout_width="409dp"
         android:layout_height="613dp"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="65dp" >
+        tools:layout_editor_absoluteY="65dp">
 
     </ListView>
 
@@ -66,7 +66,7 @@
         android:id="@+id/backDining"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="?attr/actionModeCloseDrawable"
+        app:srcCompat="@drawable/back_arrow"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="7dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
