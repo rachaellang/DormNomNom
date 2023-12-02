@@ -1,6 +1,8 @@
 package com.cs407.dormnomnom;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,19 +18,15 @@ public class MealActivity extends AppCompatActivity {
 
         // home button handler
         ImageView homeIcon = findViewById(R.id.homeIcon);
-        homeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToDiningActivity();
-            }
-        });
+        homeIcon.setOnClickListener(v -> navigateToDiningActivity());
 
         // back button handler
         ImageView backMeal = findViewById(R.id.backMeal);
-        backMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { navigateToHallActivity(); }
-        });
+        backMeal.setOnClickListener(v -> navigateToHallActivity());
+
+        // Persistent Storage
+        SharedPreferences sharedPreferences =
+                getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
     }
 
     private void navigateToDiningActivity() {

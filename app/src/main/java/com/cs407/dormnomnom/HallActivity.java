@@ -15,12 +15,7 @@ public class HallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hall);
 
         Button myMealButton = findViewById(R.id.myMeal);
-        myMealButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToMealActivity();
-            }
-        });
+        myMealButton.setOnClickListener(v -> navigateToMealActivity());
     }
 
     private void navigateToMealActivity() {

@@ -15,12 +15,7 @@ public class DiningActivity extends AppCompatActivity {
 
 //        TODO: currently only for Gordon, apply to all dining halls based on API data
         ImageView gordonImageView = findViewById(R.id.gordon);
-        gordonImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToHallActivity();
-            }
-        });
+        gordonImageView.setOnClickListener(v -> navigateToHallActivity());
     }
 
     private void navigateToHallActivity() {
