@@ -18,28 +18,21 @@ public class MealActivity extends AppCompatActivity {
 
         // home button handler
         ImageView homeIcon = findViewById(R.id.homeIcon);
-        homeIcon.setOnClickListener(v -> navigateToDiningActivity());
+        homeIcon.setOnClickListener(v -> navigateToClass(new Intent(MealActivity.this, DiningActivity.class)));
 
         // back button handler
         ImageView backMeal = findViewById(R.id.backMeal);
-        backMeal.setOnClickListener(v -> navigateToHallActivity());
+        backMeal.setOnClickListener(v -> navigateToClass(new Intent(MealActivity.this, HallActivity.class)));
 
         // Persistent Storage
         SharedPreferences sharedPreferences =
                 getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
     }
 
-    private void navigateToDiningActivity() {
-        Intent intent = new Intent(MealActivity.this, DiningActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
     /**
-     * Guides user back to the Hall Activity they were just on
+     * Guides user back to the class that they were just on
      */
-    private void navigateToHallActivity() {
-        Intent intent = new Intent(MealActivity.this, HallActivity.class);
+    private void navigateToClass(Intent intent) {
         startActivity(intent);
         finish();
     }
