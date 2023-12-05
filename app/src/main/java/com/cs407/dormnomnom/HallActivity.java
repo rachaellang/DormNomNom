@@ -2,11 +2,19 @@ package com.cs407.dormnomnom;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import android.os.AsyncTask;
+
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
 
 public class HallActivity extends AppCompatActivity {
 
@@ -16,6 +24,41 @@ public class HallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hall);
 
         String hallName = getIntent().getStringExtra("HALL_NAME");
+        String meal = getMealType();
+
+        Calendar calendar = Calendar.getInstance();
+
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
+
+        String month;
+        int rawMonth = calendar.get(Calendar.MONTH) + 1;
+
+        //Shenanigans ensue if month/day is not at least 2 digits
+        if (rawMonth < 10) {
+            month = "0";
+            month += String.valueOf(rawMonth);
+        } else {
+            month = String.valueOf(rawMonth);
+        }
+
+        String day;
+        int rawDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        if (rawDay < 10) {
+            day = "0";
+            day += String.valueOf(rawDay);
+        } else {
+            day = String.valueOf(rawDay);
+        }
+        new GetRequestTask(new GetRequestTask.AsyncResponse() {
+            @Override
+            public void processFinish(ArrayList<Station> output) {
+                for (Station station : output){
+                    Log.d("Station", station.getName());
+                }
+
+            }
+        }).execute(year, month, day, meal, hallName);
 
         TextView hallNameView = findViewById(R.id.diningHallName);
         hallNameView.setText(hallName);
@@ -29,4 +72,20 @@ public class HallActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private String getMealType() {
+        Calendar calendar = Calendar.getInstance();
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+
+        if (hours >= 7 && hours < 11) {
+            return "breakfast";
+        } else if (hours >= 11 && hours < 14) {
+            return "lunch";
+        } else if (hours >= 14 && hours < 21) {
+            return "dinner";
+        } else {
+            return "breakfast";
+        }
+    }
+
 }
