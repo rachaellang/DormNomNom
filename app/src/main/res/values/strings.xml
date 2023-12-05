@@ -3,4 +3,12 @@
     <string name="my_meal">My Meal</string>
     <string name="back_button">Back button</string>
     <string name="home_view">Home view</string>
+    <string name="select_hall">Select a dining hall to get started</string>
+    <string name="dormnomnom">DormNomNom</string>
+    <string name="carsons">Carson\'s Market</string>
+    <string name="four_lakes">Four Lakes Market</string>
+    <string name="gordons">Gordon\'s Market</string>
+    <string name="lizs">Liz\'s Market</string>
+    <string name="lowell">Lowell Market</string>
+    <string name="rhetas">Rheta\'s Market</string>
 </resources>

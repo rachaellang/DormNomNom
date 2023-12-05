@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -64,11 +65,13 @@ public class HallActivity extends AppCompatActivity {
         hallNameView.setText(hallName);
 
         Button myMealButton = findViewById(R.id.myMeal);
-        myMealButton.setOnClickListener(v -> navigateToMealActivity());
+        myMealButton.setOnClickListener(v -> navigateToClass(new Intent(HallActivity.this, MealActivity.class)));
+
+        ImageView backButton = findViewById(R.id.backDining);
+        backButton.setOnClickListener(v -> navigateToClass(new Intent (HallActivity.this, DiningActivity.class)));
     }
 
-    private void navigateToMealActivity() {
-        Intent intent = new Intent(HallActivity.this, MealActivity.class);
+    private void navigateToClass(Intent intent) {
         startActivity(intent);
         finish();
     }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginBottom="30dp"
-        android:text="Select a dining hall to get started"
+        android:text="@string/select_hall"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/rheta"
         app:layout_constraintStart_toStartOf="@+id/gordon"
@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toStartOf="@+id/rheta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rheta"
-        app:srcCompat="@drawable/gordon" />
+        app:srcCompat="@drawable/gordon"
+        android:contentDescription="@string/gordons" />
 
     <ImageView
         android:id="@+id/rheta"
@@ -40,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gordon"
         app:layout_constraintTop_toBottomOf="@+id/selectDiningHall"
-        app:srcCompat="@drawable/rheta_s" />
+        app:srcCompat="@drawable/rheta_s"
+        android:contentDescription="@string/rhetas" />
 
     <ImageView
         android:id="@+id/liz"
@@ -52,7 +54,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lowell"
         app:layout_constraintTop_toBottomOf="@+id/rheta"
-        app:srcCompat="@drawable/liz_s" />
+        app:srcCompat="@drawable/liz_s"
+        android:contentDescription="@string/lizs" />
 
     <ImageView
         android:id="@+id/lowell"
@@ -64,7 +67,8 @@
         app:layout_constraintEnd_toStartOf="@+id/liz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/liz"
-        app:srcCompat="@drawable/lowell" />
+        app:srcCompat="@drawable/lowell"
+        android:contentDescription="@string/lowell" />
 
     <ImageView
         android:id="@+id/carson"
@@ -76,7 +80,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fourlakes"
         app:layout_constraintTop_toBottomOf="@+id/liz"
-        app:srcCompat="@drawable/carson_s" />
+        app:srcCompat="@drawable/carson_s"
+        android:contentDescription="@string/carsons" />
 
     <ImageView
         android:id="@+id/fourlakes"
@@ -89,7 +94,8 @@
         app:layout_constraintEnd_toStartOf="@+id/carson"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DormNomNom"
-        app:srcCompat="@drawable/four_lakes" />
+        app:srcCompat="@drawable/four_lakes"
+        android:contentDescription="@string/four_lakes" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarDining"
@@ -110,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="473dp"
-        android:text="DormNomNom"
+        android:text="@string/dormnomnom"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:textStyle="bold"
