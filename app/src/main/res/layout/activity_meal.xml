@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text="@string/my_meal"
             android:textColor="#FFFFFF"
             android:textSize="36sp"
@@ -41,7 +41,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintRight_toRightOf="parent"
             android:contentDescription="@string/home_view"
             app:srcCompat="@drawable/home" />
 
@@ -54,7 +55,23 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/horizontalLayout"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/yourMeals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Meals:"
+            android:textSize="21dp"
+            android:layout_margin="8dp"/>
+
+        <ListView
+            android:id="@+id/savedMeals"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomLayout"

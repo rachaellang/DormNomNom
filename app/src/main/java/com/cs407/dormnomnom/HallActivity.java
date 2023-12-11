@@ -19,12 +19,14 @@ import org.json.JSONException;
 
 public class HallActivity extends AppCompatActivity {
 
+    String hallName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hall);
 
-        String hallName = getIntent().getStringExtra("HALL_NAME");
+        hallName = getIntent().getStringExtra("HALL_NAME");
         String meal = getMealType();
 
         Calendar calendar = Calendar.getInstance();
@@ -72,6 +74,7 @@ public class HallActivity extends AppCompatActivity {
     }
 
     private void navigateToClass(Intent intent) {
+        intent.putExtra("HALL_NAME", hallName);
         startActivity(intent);
         finish();
     }

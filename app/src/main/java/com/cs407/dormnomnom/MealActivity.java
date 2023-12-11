@@ -11,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MealActivity extends AppCompatActivity {
 
+    String hallName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal);
+
+        hallName = getIntent().getStringExtra("HALL_NAME");
 
         // home button handler
         ImageView homeIcon = findViewById(R.id.homeIcon);
@@ -27,12 +31,14 @@ public class MealActivity extends AppCompatActivity {
         // Persistent Storage
         SharedPreferences sharedPreferences =
                 getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
+
     }
 
     /**
      * Guides user back to the class that they were just on
      */
     private void navigateToClass(Intent intent) {
+        intent.putExtra("HALL_NAME", hallName);
         startActivity(intent);
         finish();
     }
