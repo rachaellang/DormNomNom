@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -66,32 +67,35 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String stationName = (String) getGroup(groupPosition);
 
-        // Create a LinearLayout for the group view
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.group_item, null);
+        }
 
-        // Create a TextView for the station name
-        TextView stationTextView = new TextView(context);
-        stationTextView.setText(stationName);
-        layout.addView(stationTextView);
+        TextView groupItemTextView = convertView.findViewById(R.id.groupItemTextView);
+        groupItemTextView.setText(stationName);
 
-        return layout;
+        // Set indicator bounds to move it to the right side
+        ExpandableListView expandableListView = (ExpandableListView) parent;
+        expandableListView.setIndicatorBoundsRelative(
+                expandableListView.getWidth() - 100, expandableListView.getWidth());
+
+        return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         String foodItem = (String) getChild(groupPosition, childPosition);
 
-        // Create a LinearLayout for the child view
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.child_item, null);
+        }
 
-        // Create a TextView for the food item
-        TextView foodTextView = new TextView(context);
-        foodTextView.setText(foodItem);
-        layout.addView(foodTextView);
+        TextView childItemTextView = convertView.findViewById(R.id.childItemTextView);
+        childItemTextView.setText(foodItem);
 
-        return layout;
+        return convertView;
     }
 
     @Override

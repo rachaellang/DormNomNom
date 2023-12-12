@@ -90,7 +90,7 @@ public class HallActivity extends AppCompatActivity {
                     stationNames[i] = station.getName();
                     List<String> foodItems = new ArrayList<>(station.menuItems.size());
 
-                    // sets subitems (food names)
+                    // sets sub items (food names)
                     for (FoodItem food : station.menuItems) {
                         Log.d("Food item", food.getName());
                         foodItems.add(food.getName());
