@@ -19,14 +19,30 @@ import org.json.JSONException;
 
 public class HallActivity extends AppCompatActivity {
 
-    String hallName;
+    String hallNameRaw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hall);
 
-        hallName = getIntent().getStringExtra("HALL_NAME");
+        hallNameRaw = getIntent().getStringExtra("HALL_NAME");
+        String hallName = "";
+
+        if (hallNameRaw.equals("four-lakes-market")) {
+            hallName = "Four Lakes";
+        } else if (hallNameRaw.equals("carsons-market")) {
+            hallName = "Carson's";
+        } else if (hallNameRaw.equals("lizs-market")) {
+            hallName = "Liz's";
+        } else if (hallNameRaw.equals("gordon-avenue-market")) {
+            hallName = "Gordon";
+        } else if (hallNameRaw.equals("rhetas-market")) {
+            hallName = "Rheta's";
+        } else if (hallNameRaw.equals("lowell-market")) {
+            hallName = "Lowell";
+        }
+
         String meal = getMealType();
 
         Calendar calendar = Calendar.getInstance();
@@ -61,7 +77,7 @@ public class HallActivity extends AppCompatActivity {
                 }
 
             }
-        }).execute(year, month, day, meal, hallName);
+        }).execute(year, month, day, meal, hallNameRaw);
 
         TextView hallNameView = findViewById(R.id.diningHallName);
         hallNameView.setText(hallName);
@@ -74,7 +90,7 @@ public class HallActivity extends AppCompatActivity {
     }
 
     private void navigateToClass(Intent intent) {
-        intent.putExtra("HALL_NAME", hallName);
+        intent.putExtra("HALL_NAME", hallNameRaw);
         startActivity(intent);
         finish();
     }
