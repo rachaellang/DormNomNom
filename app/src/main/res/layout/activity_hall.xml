@@ -48,7 +48,7 @@
 
 
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/stationList"
         android:layout_width="409dp"
         android:layout_height="613dp"
@@ -59,7 +59,7 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="65dp">
 
-    </ListView>
+    </ExpandableListView>
 
     <ImageView
         android:id="@+id/backDining"

@@ -6,31 +6,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import android.os.AsyncTask;
-
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 public class HallActivity extends AppCompatActivity {
 
-    String hallName;
-    ListView stationList;
+    ExpandableListView stationList;
     String[] stationNames;
+    String[] foodNames;
+    HashMap<String, List<String>> stationFoodMap;
     String hallNameRaw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hall);
-        stationNames = new String[]{"Something", "is", "wrong"};
         stationList = findViewById(R.id.stationList);
 
         hallNameRaw = getIntent().getStringExtra("HALL_NAME");
@@ -79,20 +79,30 @@ public class HallActivity extends AppCompatActivity {
         new GetRequestTask(new GetRequestTask.AsyncResponse() {
             @Override
             public void processFinish(ArrayList<Station> output) {
-                stationNames = new String[output.size()]; // initializes String[]
+                // Initialize the HashMap to store station names and corresponding food items
+                stationFoodMap = new HashMap<>();
+                stationNames = new String[output.size()];
+
+                // sets station names for the items
                 int i = 0;
-                for (Station station : output){
+                for (Station station : output) {
                     Log.d("Station", station.getName());
-                    stationNames[i] = station.getName(); // fills in all station names
+                    stationNames[i] = station.getName();
+                    List<String> foodItems = new ArrayList<>(station.menuItems.size());
+
+                    // sets subitems (food names)
+                    for (FoodItem food : station.menuItems) {
+                        Log.d("Food item", food.getName());
+                        foodItems.add(food.getName());
+                    }
+
+                    stationFoodMap.put(stationNames[i], foodItems);
                     i++;
                 }
 
-                ArrayAdapter<String> arr; // arr of all station names to implement in ListView
-                arr = new ArrayAdapter<String>(
-                        HallActivity.this,
-                        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                        stationNames);
-                stationList.setAdapter(arr); // sets ListView stationNames
+                // Create an adapter for the ExpandableListView
+                ExpandableListAdapter adapter = new CustomExpandableAdapter(HallActivity.this, stationNames, stationFoodMap);
+                stationList.setAdapter(adapter);
 
             }
         }).execute(year, month, day, meal, hallNameRaw);
