@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,11 +22,15 @@ import org.json.JSONException;
 public class HallActivity extends AppCompatActivity {
 
     String hallName;
+    ListView stationList;
+    String[] stationNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hall);
+        stationNames = new String[]{"Something", "is", "wrong"};
+        stationList = findViewById(R.id.stationList);
 
         hallName = getIntent().getStringExtra("HALL_NAME");
         String meal = getMealType();
@@ -56,9 +62,20 @@ public class HallActivity extends AppCompatActivity {
         new GetRequestTask(new GetRequestTask.AsyncResponse() {
             @Override
             public void processFinish(ArrayList<Station> output) {
+                stationNames = new String[output.size()]; // initializes String[]
+                int i = 0;
                 for (Station station : output){
                     Log.d("Station", station.getName());
+                    stationNames[i] = station.getName(); // fills in all station names
+                    i++;
                 }
+
+                ArrayAdapter<String> arr; // arr of all station names to implement in ListView
+                arr = new ArrayAdapter<String>(
+                        HallActivity.this,
+                        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                        stationNames);
+                stationList.setAdapter(arr); // sets ListView stationNames
 
             }
         }).execute(year, month, day, meal, hallName);
@@ -66,9 +83,11 @@ public class HallActivity extends AppCompatActivity {
         TextView hallNameView = findViewById(R.id.diningHallName);
         hallNameView.setText(hallName);
 
+        // handles My Meal button
         Button myMealButton = findViewById(R.id.myMeal);
         myMealButton.setOnClickListener(v -> navigateToClass(new Intent(HallActivity.this, MealActivity.class)));
 
+        // handles Back button
         ImageView backButton = findViewById(R.id.backDining);
         backButton.setOnClickListener(v -> navigateToClass(new Intent (HallActivity.this, DiningActivity.class)));
     }
