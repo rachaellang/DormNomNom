@@ -3,8 +3,12 @@ package com.cs407.dormnomnom;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,13 +53,22 @@ public class FoodActivity extends AppCompatActivity {
 
             // displays carbs
             TextView macroDisplay = findViewById(R.id.macroDisplay);
-            macroDisplay.setText("        Macronutrient Info\n\n" +
-                    "   Per serving\n" +
-                    "Calories: " + selectedFoodItem.getNutrition()[0] + "\n" +
-                    "Fat: " + selectedFoodItem.getNutrition()[1] + " g\n" +
-                    "Carbs: " + selectedFoodItem.getNutrition()[2] + " g\n" +
-                    "Sodium: " + selectedFoodItem.getNutrition()[3] + " mg\n" +
-                    "Protein: " + selectedFoodItem.getNutrition()[4] + " g");
+
+            String macroInput = "        Macronutrient Info\n\n" +
+                    "Per serving\n" +
+                    "   Calories: " + selectedFoodItem.getNutrition()[0] + "\n" +
+                    "   Fat: " + selectedFoodItem.getNutrition()[1] + " g\n" +
+                    "   Carbs: " + selectedFoodItem.getNutrition()[2] + " g\n" +
+                    "   Sodium: " + selectedFoodItem.getNutrition()[3] + " mg\n" +
+                    "   Protein: " + selectedFoodItem.getNutrition()[4] + " g";
+            SpannableString macroInputSpannable = new SpannableString(macroInput);
+//
+            macroInputSpannable.setSpan(new StyleSpan(Typeface.BOLD), macroInput.indexOf("Macronutrient Info"), macroInput.indexOf("Macronutrient Info") + "Macronutrient Info".length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            macroInputSpannable.setSpan(new UnderlineSpan(), macroInput.indexOf("Macronutrient Info"), macroInput.indexOf("Macronutrient Info") + "Macronutrient Info".length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            macroInputSpannable.setSpan(new StyleSpan(Typeface.BOLD), macroInput.indexOf("Per serving"), macroInput.indexOf("Per serving") + "Per serving:".length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+//
+            macroDisplay.setText(macroInputSpannable);
 
             Button addToMyMealButton = findViewById(R.id.addToMyMeal);
             addToMyMealButton.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class StationActivity extends AppCompatActivity {
 
+    //Kamila Domagala
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,6 @@ public class StationActivity extends AppCompatActivity {
 
         TextView diningHallView = findViewById(R.id.foodName);
         diningHallView.setText(station);
-
 
         new AsyncTask<Void, Void, ArrayList<FoodItem>>() {
             @Override

@@ -117,7 +117,7 @@ public class HallActivity extends AppCompatActivity {
                         FoodItem selectedFoodItem = (FoodItem) adapter.getChild(groupPosition, childPosition);
 
                         // Convert FoodItem to JSON string
-                        foodItemJson = selectedFoodItem.toJsonString();
+                        String foodItemJson = selectedFoodItem.toJsonString();
 
                         // Create an Intent to start the FoodActivity
                         Intent intent = new Intent(HallActivity.this, FoodActivity.class);
