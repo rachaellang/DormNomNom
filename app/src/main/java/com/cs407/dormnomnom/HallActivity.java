@@ -75,7 +75,6 @@ public class HallActivity extends AppCompatActivity {
                 for (Station station : output){
                     Log.d("Station", station.getName());
                 }
-
             }
         }).execute(year, month, day, meal, hallNameRaw);
 
