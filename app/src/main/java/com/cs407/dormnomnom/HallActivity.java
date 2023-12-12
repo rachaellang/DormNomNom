@@ -24,6 +24,7 @@ public class HallActivity extends AppCompatActivity {
     String hallName;
     ListView stationList;
     String[] stationNames;
+    String hallNameRaw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,23 @@ public class HallActivity extends AppCompatActivity {
         stationNames = new String[]{"Something", "is", "wrong"};
         stationList = findViewById(R.id.stationList);
 
-        hallName = getIntent().getStringExtra("HALL_NAME");
+        hallNameRaw = getIntent().getStringExtra("HALL_NAME");
+        String hallName = "";
+
+        if (hallNameRaw.equals("four-lakes-market")) {
+            hallName = "Four Lakes";
+        } else if (hallNameRaw.equals("carsons-market")) {
+            hallName = "Carson's";
+        } else if (hallNameRaw.equals("lizs-market")) {
+            hallName = "Liz's";
+        } else if (hallNameRaw.equals("gordon-avenue-market")) {
+            hallName = "Gordon";
+        } else if (hallNameRaw.equals("rhetas-market")) {
+            hallName = "Rheta's";
+        } else if (hallNameRaw.equals("lowell-market")) {
+            hallName = "Lowell";
+        }
+
         String meal = getMealType();
 
         Calendar calendar = Calendar.getInstance();
@@ -78,7 +95,7 @@ public class HallActivity extends AppCompatActivity {
                 stationList.setAdapter(arr); // sets ListView stationNames
 
             }
-        }).execute(year, month, day, meal, hallName);
+        }).execute(year, month, day, meal, hallNameRaw);
 
         TextView hallNameView = findViewById(R.id.diningHallName);
         hallNameView.setText(hallName);
@@ -93,7 +110,7 @@ public class HallActivity extends AppCompatActivity {
     }
 
     private void navigateToClass(Intent intent) {
-        intent.putExtra("HALL_NAME", hallName);
+        intent.putExtra("HALL_NAME", hallNameRaw);
         startActivity(intent);
         finish();
     }

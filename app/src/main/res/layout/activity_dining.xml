@@ -24,12 +24,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="37dp"
         android:layout_marginEnd="19dp"
+        android:contentDescription="@string/gordons"
         app:layout_constraintBottom_toBottomOf="@+id/rheta"
         app:layout_constraintEnd_toStartOf="@+id/rheta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rheta"
-        app:srcCompat="@drawable/gordon"
-        android:contentDescription="@string/gordons" />
+        app:srcCompat="@drawable/gordon" />
 
     <ImageView
         android:id="@+id/rheta"
@@ -37,12 +37,12 @@
         android:layout_height="0dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="24dp"
+        android:contentDescription="@string/rhetas"
         app:layout_constraintBottom_toTopOf="@+id/liz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gordon"
         app:layout_constraintTop_toBottomOf="@+id/selectDiningHall"
-        app:srcCompat="@drawable/rheta_s"
-        android:contentDescription="@string/rhetas" />
+        app:srcCompat="@drawable/rheta_s" />
 
     <ImageView
         android:id="@+id/liz"
@@ -50,12 +50,12 @@
         android:layout_height="0dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="20dp"
+        android:contentDescription="@string/lizs"
         app:layout_constraintBottom_toTopOf="@+id/carson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lowell"
         app:layout_constraintTop_toBottomOf="@+id/rheta"
-        app:srcCompat="@drawable/liz_s"
-        android:contentDescription="@string/lizs" />
+        app:srcCompat="@drawable/liz_s" />
 
     <ImageView
         android:id="@+id/lowell"
@@ -63,25 +63,26 @@
         android:layout_height="0dp"
         android:layout_marginStart="37dp"
         android:layout_marginEnd="19dp"
+        android:contentDescription="@string/lowell"
         app:layout_constraintBottom_toBottomOf="@+id/liz"
         app:layout_constraintEnd_toStartOf="@+id/liz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/liz"
-        app:srcCompat="@drawable/lowell"
-        android:contentDescription="@string/lowell" />
+        app:srcCompat="@drawable/lowell" />
 
     <ImageView
         android:id="@+id/carson"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="533dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="30dp"
+        android:contentDescription="@string/carsons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fourlakes"
-        app:layout_constraintTop_toBottomOf="@+id/liz"
-        app:srcCompat="@drawable/carson_s"
-        android:contentDescription="@string/carsons" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/carson_s" />
 
     <ImageView
         android:id="@+id/fourlakes"
@@ -90,12 +91,12 @@
         android:layout_marginStart="37dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="30dp"
+        android:contentDescription="@string/four_lakes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/carson"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DormNomNom"
-        app:srcCompat="@drawable/four_lakes"
-        android:contentDescription="@string/four_lakes" />
+        app:srcCompat="@drawable/four_lakes" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarDining"
