@@ -17,6 +17,8 @@ import com.google.android.gms.location.LocationServices;
 import android.location.Location;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         Button button = findViewById(R.id.button);
