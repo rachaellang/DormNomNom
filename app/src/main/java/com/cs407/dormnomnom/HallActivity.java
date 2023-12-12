@@ -1,6 +1,8 @@
 package com.cs407.dormnomnom;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +26,7 @@ public class HallActivity extends AppCompatActivity {
     ExpandableListView stationList;
     String[] stationNames;
     String[] foodNames;
-    HashMap<String, List<String>> stationFoodMap;
+    HashMap<String, List<FoodItem>> stationFoodMap;
     String hallNameRaw;
 
     @Override
@@ -83,17 +85,15 @@ public class HallActivity extends AppCompatActivity {
                 stationFoodMap = new HashMap<>();
                 stationNames = new String[output.size()];
 
-                // sets station names for the items
                 int i = 0;
                 for (Station station : output) {
                     Log.d("Station", station.getName());
                     stationNames[i] = station.getName();
-                    List<String> foodItems = new ArrayList<>(station.menuItems.size());
+                    List<FoodItem> foodItems = new ArrayList<>(station.menuItems.size());
 
-                    // sets sub items (food names)
                     for (FoodItem food : station.menuItems) {
                         Log.d("Food item", food.getName());
-                        foodItems.add(food.getName());
+                        foodItems.add(food);
                     }
 
                     stationFoodMap.put(stationNames[i], foodItems);
@@ -103,6 +103,27 @@ public class HallActivity extends AppCompatActivity {
                 // Create an adapter for the ExpandableListView
                 ExpandableListAdapter adapter = new CustomExpandableAdapter(HallActivity.this, stationNames, stationFoodMap);
                 stationList.setAdapter(adapter);
+
+                // takes user to FoodActivity when subitem is selected
+                stationList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                        // Get the selected food item
+                        FoodItem selectedFoodItem = (FoodItem) adapter.getChild(groupPosition, childPosition);
+
+                        // Convert FoodItem to JSON string
+                        String foodItemJson = selectedFoodItem.toJsonString();
+
+                        // Create an Intent to start the FoodActivity
+                        Intent intent = new Intent(HallActivity.this, FoodActivity.class);
+                        // intent.putExtra("HALL_NAME", hallNameRaw);
+                        intent.putExtra("FOOD_ITEM_JSON", foodItemJson);
+                        navigateToClass(intent);
+
+                        return true; // Return true to indicate that the click has been handled
+                    }
+                });
+
 
             }
         }).execute(year, month, day, meal, hallNameRaw);
@@ -133,7 +154,7 @@ public class HallActivity extends AppCompatActivity {
             return "breakfast";
         } else if (hours >= 11 && hours < 14) {
             return "lunch";
-        } else if (hours >= 14 && hours < 21) {
+        } else if (hours >= 14 && hours < 23) {
             return "dinner";
         } else {
             return "breakfast";

@@ -1,5 +1,8 @@
 package com.cs407.dormnomnom;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class FoodItem {
     String name;
     Double calories;
@@ -65,6 +68,25 @@ public class FoodItem {
         }
 
         return facts;
+    }
+
+    // Used to convert object params into strings for activity switching
+    public String toJsonString() {
+        try {
+            JSONObject json = new JSONObject();
+            json.put("name", name);
+            json.put("calories", calories);
+            json.put("gFat", gFat);
+            json.put("gCarbs", gCarbs);
+            json.put("mgSodium", mgSodium);
+            json.put("gProtein", gProtein);
+            json.put("station", station);
+
+            return json.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

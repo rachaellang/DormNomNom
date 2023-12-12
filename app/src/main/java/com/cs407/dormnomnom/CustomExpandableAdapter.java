@@ -16,9 +16,9 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
 
     private final Context context;
     private final String[] stationNames;
-    private final HashMap<String, List<String>> stationFoodMap;
+    private final HashMap<String, List<FoodItem>> stationFoodMap;
 
-    public CustomExpandableAdapter(Context context, String[] stationNames, HashMap<String, List<String>> stationFoodMap) {
+    public CustomExpandableAdapter(Context context, String[] stationNames, HashMap<String, List<FoodItem>> stationFoodMap) {
         this.context = context;
         this.stationNames = stationNames;
         this.stationFoodMap = stationFoodMap;
@@ -32,7 +32,7 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         String stationName = stationNames[groupPosition];
-        List<String> foodItems = stationFoodMap.get(stationName);
+        List<FoodItem> foodItems = stationFoodMap.get(stationName);
         return foodItems != null ? foodItems.size() : 0;
     }
 
@@ -44,7 +44,7 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         String stationName = stationNames[groupPosition];
-        List<String> foodItems = stationFoodMap.get(stationName);
+        List<FoodItem> foodItems = stationFoodMap.get(stationName);
         return foodItems != null ? foodItems.get(childPosition) : null;
     }
 
@@ -85,7 +85,7 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        String foodItem = (String) getChild(groupPosition, childPosition);
+        FoodItem foodItem = (FoodItem) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -93,7 +93,7 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
         }
 
         TextView childItemTextView = convertView.findViewById(R.id.childItemTextView);
-        childItemTextView.setText(foodItem);
+        childItemTextView.setText(foodItem != null ? foodItem.getName() : "");
 
         return convertView;
     }

@@ -21,19 +21,22 @@
         android:id="@+id/foodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_margin="5dp"
         android:text="[name of food]"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/backFood"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="411dp"
         android:layout_height="43dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="689dp">
 
@@ -51,20 +54,17 @@
             android:text="Add to My Meal" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="nutrition facts"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="188dp" />
-
     <ImageView
         android:id="@+id/backFood"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="?attr/actionModeCloseDrawable"
+        app:srcCompat="@drawable/back_arrow"
+        android:layout_margin="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp" />
+        tools:layout_editor_absoluteY="7dp"
+        android:contentDescription="Back arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

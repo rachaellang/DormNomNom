@@ -27,11 +27,6 @@ public class MealActivity extends AppCompatActivity {
         // back button handler
         ImageView backMeal = findViewById(R.id.backMeal);
         backMeal.setOnClickListener(v -> navigateToClass(new Intent(MealActivity.this, HallActivity.class)));
-
-        // Persistent Storage
-        SharedPreferences sharedPreferences =
-                getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
-
     }
 
     /**
