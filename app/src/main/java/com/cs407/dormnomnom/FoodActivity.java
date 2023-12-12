@@ -24,6 +24,7 @@ public class FoodActivity extends AppCompatActivity {
     private FoodItem selectedFoodItem;
     String foodItemJson;
 
+    //Kamila Domagala
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

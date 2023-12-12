@@ -28,6 +28,8 @@ public class GetRequestTask extends AsyncTask<String, Void, ArrayList<Station>> 
             return null;
         }
     }
+
+    //Kamila Domagala
     protected ArrayList<FoodItem> getMenu(String... params) {
         try {
             GetRequest request = new GetRequest(params[0], params[1], params[2], params[3], params[4]);

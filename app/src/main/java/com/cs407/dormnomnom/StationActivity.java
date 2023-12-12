@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class StationActivity extends AppCompatActivity {
 
+    //Kamila Domagala
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

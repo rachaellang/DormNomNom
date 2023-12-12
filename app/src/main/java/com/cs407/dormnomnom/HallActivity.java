@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HallActivity extends AppCompatActivity {
+    private ArrayList<String> selectedFoodItemsJson = new ArrayList<>();
 
     ExpandableListView stationList;
     String[] stationNames;
@@ -78,6 +79,7 @@ public class HallActivity extends AppCompatActivity {
         } else {
             day = String.valueOf(rawDay);
         }
+        String finalHallName = hallName;
         new GetRequestTask(new GetRequestTask.AsyncResponse() {
             @Override
             public void processFinish(ArrayList<Station> output) {
@@ -111,16 +113,25 @@ public class HallActivity extends AppCompatActivity {
                     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                         // Get the selected food item
                         FoodItem selectedFoodItem = (FoodItem) adapter.getChild(groupPosition, childPosition);
-
-                        // Convert FoodItem to JSON string
                         String foodItemJson = selectedFoodItem.toJsonString();
 
+                        // Convert FoodItem to JSON string
+                        selectedFoodItemsJson.add(foodItemJson);
                         // Create an Intent to start the FoodActivity
                         Intent intent = new Intent(HallActivity.this, FoodActivity.class);
                         // intent.putExtra("HALL_NAME", hallNameRaw);
                         intent.putExtra("FOOD_ITEM_JSON", foodItemJson);
                         navigateToClass(intent);
 
+                        // handles My Meal button
+                        Button myMealButton = findViewById(R.id.myMeal);
+                        // prevent app from crashing when clicking on "My Meal" when no food items are added to meal
+                        Intent i = new Intent (HallActivity.this, MealActivity.class);
+                        i.putExtra("HALL_NAME", finalHallName);
+                        if (foodItemJson != null) {
+                            i.putExtra("json", foodItemJson);
+                        }
+                        myMealButton.setOnClickListener(a -> navigateToClass(i));
                         return true; // Return true to indicate that the click has been handled
                     }
                 });
@@ -132,9 +143,13 @@ public class HallActivity extends AppCompatActivity {
         TextView hallNameView = findViewById(R.id.diningHallName);
         hallNameView.setText(hallName);
 
-        // handles My Meal button
         Button myMealButton = findViewById(R.id.myMeal);
-        myMealButton.setOnClickListener(v -> navigateToClass(new Intent(HallActivity.this, MealActivity.class)));
+        myMealButton.setOnClickListener(v -> {
+            Intent myMealIntent = new Intent(HallActivity.this, MealActivity.class);
+            myMealIntent.putExtra("HALL_NAME", hallNameRaw);
+            myMealIntent.putStringArrayListExtra("SELECTED_FOOD_ITEMS_JSON", selectedFoodItemsJson);
+            navigateToClass(myMealIntent);
+        });
 
         // handles Back button
         ImageView backButton = findViewById(R.id.backDining);
