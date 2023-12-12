@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -89,7 +86,10 @@ public class FoodActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent2 = new Intent(FoodActivity.this, MealActivity.class);
                     intent2.putExtra("HALL_NAME", hallName);
-                    intent2.putExtra("json", foodItemJson);
+                    // prevent app from crashing when clicking on "My Meal" when no food items are added to meal
+                    if (foodItemJson != null) {
+                        intent2.putExtra("json", foodItemJson);
+                    }
                     startActivity(intent2);
                     finish();
                 }
