@@ -8,16 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import android.location.Location;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("AHHH", "Debug log message");
             Log.d("Distance", String.valueOf(location.distanceTo(hallLocation)));
 
-            if (location.distanceTo(hallLocation) <= 100) {
+            if (location.distanceTo(hallLocation) <= 500) {
                 return hallNames[hallLocations.indexOf(hallLocation)];
             }
         }
