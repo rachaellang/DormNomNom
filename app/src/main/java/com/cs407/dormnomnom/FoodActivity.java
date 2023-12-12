@@ -30,14 +30,8 @@ public class FoodActivity extends AppCompatActivity {
         Intent intent = getIntent();
         hallName = intent.getStringExtra("HALL_NAME");
         foodItemJson = intent.getStringExtra("FOOD_ITEM_JSON");
+        Log.d("in FoodActivity", foodItemJson);
 
-        // handles Back button
-        ImageView backButton = findViewById(R.id.backFood);
-        backButton.setOnClickListener(v -> navigateToClass(new Intent(FoodActivity.this, HallActivity.class)));
-
-        // handles My Meal button
-        Button myMeal = findViewById(R.id.myMeal);
-        myMeal.setOnClickListener(v -> navigateToClass(new Intent(FoodActivity.this, MealActivity.class)));
 
         // Convert JSON string to FoodItem
         try {
@@ -65,25 +59,48 @@ public class FoodActivity extends AppCompatActivity {
                     "Sodium: " + selectedFoodItem.getNutrition()[3] + " mg\n" +
                     "Protein: " + selectedFoodItem.getNutrition()[4] + " g");
 
+            Button addToMyMealButton = findViewById(R.id.addToMyMeal);
+            addToMyMealButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
+                    sharedPreferences.edit().putString("json", foodItemJson).apply();
+
+//                    Intent intent = new Intent();
+                    intent.putExtra("json", foodItemJson);
+
+//                    Toast.makeText(this, "Food added to your meal!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            // handles Back button
+            ImageView backButton = findViewById(R.id.backFood);
+            backButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent2 = new Intent(FoodActivity.this, HallActivity.class);
+                    intent2.putExtra("HALL_NAME", hallName);
+                    intent2.putExtra("json", foodItemJson);
+                    startActivity(intent2);
+                    finish();
+                }
+            });
+
+            // handles My Meal button
+            Button myMeal = findViewById(R.id.myMeal);
+            myMeal.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent2 = new Intent(FoodActivity.this, MealActivity.class);
+                    intent2.putExtra("HALL_NAME", hallName);
+                    intent2.putExtra("json", foodItemJson);
+                    startActivity(intent2);
+                    finish();
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        Button addToMyMealButton = findViewById(R.id.addToMyMeal);
-        addToMyMealButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addFoodToMeal();
-            }
-        });
-    }
-
-    private void addFoodToMeal() {
-        SharedPreferences sharedPreferences = getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString("json", foodItemJson).apply();
-
-        Toast.makeText(this, "Food added to your meal!", Toast.LENGTH_SHORT).show();
-//        logFoodItemDetails();
     }
 
     private void navigateToClass(Intent intent) {
