@@ -46,10 +46,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-
-    <ListView
-        android:id="@+id/mealList"
+    <ExpandableListView
+        android:id="@+id/stationList"
         android:layout_width="409dp"
         android:layout_height="613dp"
         android:layout_margin="0dp"
@@ -58,8 +56,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="65dp">
-
-    </ListView>
+    </ExpandableListView>
 
     <ImageView
         android:id="@+id/backDining"
