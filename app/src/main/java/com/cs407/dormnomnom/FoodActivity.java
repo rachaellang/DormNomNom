@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FoodActivity extends AppCompatActivity {
 
+    String hallName;
     private FoodItem selectedFoodItem;
     String foodItemJson;
 
@@ -24,13 +28,21 @@ public class FoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food);
 
         Intent intent = getIntent();
-        String hallName = intent.getStringExtra("HALL_NAME");
+        hallName = intent.getStringExtra("HALL_NAME");
         foodItemJson = intent.getStringExtra("FOOD_ITEM_JSON");
+
+        // handles Back button
+        ImageView backButton = findViewById(R.id.backFood);
+        backButton.setOnClickListener(v -> navigateToClass(new Intent(FoodActivity.this, HallActivity.class)));
+
+        // handles My Meal button
+        Button myMeal = findViewById(R.id.myMeal);
+        myMeal.setOnClickListener(v -> navigateToClass(new Intent(FoodActivity.this, MealActivity.class)));
 
         // Convert JSON string to FoodItem
         try {
             JSONObject json = new JSONObject(foodItemJson);
-            selectedFoodItem = new FoodItem(
+            FoodItem selectedFoodItem = new FoodItem(
                     json.getString("name"),
                     json.getDouble("calories"),
                     json.getDouble("gFat"),
@@ -38,6 +50,20 @@ public class FoodActivity extends AppCompatActivity {
                     json.getDouble("mgSodium"),
                     json.getDouble("gProtein")
             );
+
+            // handles changing Food Name textView
+            TextView foodName = findViewById(R.id.foodName);
+            foodName.setText(selectedFoodItem.getName());
+
+            // displays carbs
+            TextView macroDisplay = findViewById(R.id.macroDisplay);
+            macroDisplay.setText("        Macronutrient Info\n\n" +
+                    "   Per serving\n" +
+                    "Calories: " + selectedFoodItem.getNutrition()[0] + "\n" +
+                    "Fat: " + selectedFoodItem.getNutrition()[1] + " g\n" +
+                    "Carbs: " + selectedFoodItem.getNutrition()[2] + " g\n" +
+                    "Sodium: " + selectedFoodItem.getNutrition()[3] + " mg\n" +
+                    "Protein: " + selectedFoodItem.getNutrition()[4] + " g");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -58,6 +84,12 @@ public class FoodActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Food added to your meal!", Toast.LENGTH_SHORT).show();
 //        logFoodItemDetails();
+    }
+
+    private void navigateToClass(Intent intent) {
+        intent.putExtra("HALL_NAME", hallName);
+        startActivity(intent);
+        finish();
     }
 
 //    private void logFoodItemDetails() {
