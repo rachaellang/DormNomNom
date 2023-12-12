@@ -30,7 +30,6 @@ public class StationActivity extends AppCompatActivity {
         TextView diningHallView = findViewById(R.id.foodName);
         diningHallView.setText(station);
 
-
         new AsyncTask<Void, Void, ArrayList<FoodItem>>() {
             @Override
             protected ArrayList<FoodItem> doInBackground(Void... voids) {

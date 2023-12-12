@@ -90,6 +90,7 @@ public class HallActivity extends AppCompatActivity {
                     Log.d("Station", station.getName());
                     stationNames[i] = station.getName();
                     List<FoodItem> foodItems = new ArrayList<>(station.menuItems.size());
+                    stationNames[stationNames.length-1] = "Build Your Own";
 
                     for (FoodItem food : station.menuItems) {
                         Log.d("Food item", food.getName());

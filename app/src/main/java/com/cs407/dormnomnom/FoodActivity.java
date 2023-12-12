@@ -47,12 +47,12 @@ public class FoodActivity extends AppCompatActivity {
             // displays carbs
             TextView macroDisplay = findViewById(R.id.macroDisplay);
             macroDisplay.setText("        Macronutrient Info\n\n" +
-                    "   Per serving\n" +
-                    "Calories: " + selectedFoodItem.getNutrition()[0] + "\n" +
-                    "Fat: " + selectedFoodItem.getNutrition()[1] + " g\n" +
-                    "Carbs: " + selectedFoodItem.getNutrition()[2] + " g\n" +
-                    "Sodium: " + selectedFoodItem.getNutrition()[3] + " mg\n" +
-                    "Protein: " + selectedFoodItem.getNutrition()[4] + " g");
+                    "Per serving\n" +
+                    "   Calories: " + selectedFoodItem.getNutrition()[0] + "\n" +
+                    "   Fat: " + selectedFoodItem.getNutrition()[1] + " g\n" +
+                    "   Carbs: " + selectedFoodItem.getNutrition()[2] + " g\n" +
+                    "   Sodium: " + selectedFoodItem.getNutrition()[3] + " mg\n" +
+                    "   Protein: " + selectedFoodItem.getNutrition()[4] + " g");
 
             Button addToMyMealButton = findViewById(R.id.addToMyMeal);
             addToMyMealButton.setOnClickListener(new View.OnClickListener() {

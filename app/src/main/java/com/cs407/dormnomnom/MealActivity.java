@@ -68,12 +68,12 @@ public class MealActivity extends AppCompatActivity {
             // display macros on screen
             TextView macroDisplay = findViewById(R.id.macroText);
             macroDisplay.setText("        Macronutrient Info\n\n" +
-                    "   Per serving\n" +
-                    "Calories: " + caloriesSum + "\n" +
-                    "Fat: " + fatSum + " g\n" +
-                    "Carbs: " + carbsSum + " g\n" +
-                    "Sodium: " + sodiumSum + " mg\n" +
-                    "Protein: " + proteinSum + " g");
+                    "Per serving\n" +
+                    "   Calories: " + caloriesSum + "\n" +
+                    "   Fat: " + fatSum + " g\n" +
+                    "   Carbs: " + carbsSum + " g\n" +
+                    "   Sodium: " + sodiumSum + " mg\n" +
+                    "   Protein: " + proteinSum + " g");
 
         } catch (JSONException e) {
             e.printStackTrace();
