@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,10 +30,14 @@ public class MealActivity extends AppCompatActivity {
         hallName = intent.getStringExtra("HALL_NAME");
         foodItemJson = intent.getStringExtra("json");
 
-        try {
+        Float caloriesSum = sharedPreferences.getFloat("caloriesSum", 0.0F);
+        Float fatSum = sharedPreferences.getFloat("fatSum", 0.0F);
+        Float carbsSum = sharedPreferences.getFloat("carbsSum", 0.0F);
+        Float sodiumSum = sharedPreferences.getFloat("sodiumSum", 0.0F);
+        Float proteinSum = sharedPreferences.getFloat("proteinSum", 0.0F);
 
+        try {
             JSONObject json = new JSONObject(foodItemJson);
-            Log.d("tag", "after json creation");
             FoodItem selectedFoodItem = new FoodItem(
                     json.getString("name"),
                     json.getDouble("calories"),
@@ -41,10 +46,34 @@ public class MealActivity extends AppCompatActivity {
                     json.getDouble("mgSodium"),
                     json.getDouble("gProtein")
             );
-            Log.d("tag", "after json creation2");
 
+            caloriesSum += (float) selectedFoodItem.getNutrition()[0];
+            fatSum += (float) selectedFoodItem.getNutrition()[1];
+            carbsSum += (float) selectedFoodItem.getNutrition()[2];
+            sodiumSum += (float) selectedFoodItem.getNutrition()[3];
+            proteinSum += (float) selectedFoodItem.getNutrition()[4];
 
-//            Log.d("tag", selectedFoodItem.getName());
+            sharedPreferences.edit().putFloat("caloriesSum", caloriesSum).apply();
+            sharedPreferences.edit().putFloat("fatSum", fatSum).apply();
+            sharedPreferences.edit().putFloat("carbsSum", carbsSum).apply();
+            sharedPreferences.edit().putFloat("sodiumSum", sodiumSum).apply();
+            sharedPreferences.edit().putFloat("proteinSum", proteinSum).apply();
+
+            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("caloriesSum", 0.0F)));
+            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("fatSum", 0.0F)));
+            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("carbsSum", 0.0F)));
+            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("sodiumSum", 0.0F)));
+            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("proteinSum", 0.0F)));
+
+            // display macros on screen
+            TextView macroDisplay = findViewById(R.id.macroText);
+            macroDisplay.setText("        Macronutrient Info\n\n" +
+                    "   Per serving\n" +
+                    "Calories: " + caloriesSum + "\n" +
+                    "Fat: " + fatSum + " g\n" +
+                    "Carbs: " + carbsSum + " g\n" +
+                    "Sodium: " + sodiumSum + " mg\n" +
+                    "Protein: " + proteinSum + " g");
 
         } catch (JSONException e) {
             e.printStackTrace();

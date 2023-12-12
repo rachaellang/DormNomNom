@@ -30,8 +30,6 @@ public class FoodActivity extends AppCompatActivity {
         Intent intent = getIntent();
         hallName = intent.getStringExtra("HALL_NAME");
         foodItemJson = intent.getStringExtra("FOOD_ITEM_JSON");
-        Log.d("in FoodActivity", foodItemJson);
-
 
         // Convert JSON string to FoodItem
         try {
@@ -66,10 +64,8 @@ public class FoodActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences = getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
                     sharedPreferences.edit().putString("json", foodItemJson).apply();
 
-//                    Intent intent = new Intent();
                     intent.putExtra("json", foodItemJson);
-
-//                    Toast.makeText(this, "Food added to your meal!", Toast.LENGTH_SHORT).show();
+                    showToast();
                 }
             });
 
@@ -109,17 +105,7 @@ public class FoodActivity extends AppCompatActivity {
         finish();
     }
 
-//    private void logFoodItemDetails() {
-//        if (selectedFoodItem != null) {
-//            Log.i("FoodActivity", "Food Item Details: \n" +
-//                    "Name: " + selectedFoodItem.getName() + "\n" +
-//                    "Calories: " + selectedFoodItem.getNutrition()[0] + "\n" +
-//                    "Fat: " + selectedFoodItem.getNutrition()[1] + "g\n" +
-//                    "Carbs: " + selectedFoodItem.getNutrition()[2] + "g\n" +
-//                    "Sodium: " + selectedFoodItem.getNutrition()[3] + "mg\n" +
-//                    "Protein: " + selectedFoodItem.getNutrition()[4] + "g");
-//        } else {
-//            Log.w("FoodActivity", "Selected food item is null");
-//        }
-//    }
+    private void showToast() {
+        Toast.makeText(this, "Food added to your meal!", Toast.LENGTH_SHORT).show();
+    }
 }

@@ -64,12 +64,16 @@
             android:text="Your Meals:"
             android:textSize="21dp" />
 
-        <ListView
-            android:id="@+id/savedMeals"
+        <TextView
+            android:id="@+id/macroText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" />
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintTop_toTopOf="@id/yourMeals"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="124dp" />
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
