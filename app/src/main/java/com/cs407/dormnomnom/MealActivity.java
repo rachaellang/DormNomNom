@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +17,7 @@ public class MealActivity extends AppCompatActivity {
 
     String hallName;
     String foodItemJson;
+    boolean foodAdded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,8 @@ public class MealActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         hallName = intent.getStringExtra("HALL_NAME");
-        foodItemJson = intent.getStringExtra("json");
+        foodItemJson = sharedPreferences.getString("json", null);
+        foodAdded = intent.getBooleanExtra("foodAdded", false);
 
         Float caloriesSum = sharedPreferences.getFloat("caloriesSum", 0.0F);
         Float fatSum = sharedPreferences.getFloat("fatSum", 0.0F);
@@ -36,36 +37,50 @@ public class MealActivity extends AppCompatActivity {
         Float sodiumSum = sharedPreferences.getFloat("sodiumSum", 0.0F);
         Float proteinSum = sharedPreferences.getFloat("proteinSum", 0.0F);
 
-        try {
-            JSONObject json = new JSONObject(foodItemJson);
-            FoodItem selectedFoodItem = new FoodItem(
-                    json.getString("name"),
-                    json.getDouble("calories"),
-                    json.getDouble("gFat"),
-                    json.getDouble("gCarbs"),
-                    json.getDouble("mgSodium"),
-                    json.getDouble("gProtein")
-            );
+        if (foodItemJson != null && foodAdded) {
+            try {
+                JSONObject json = new JSONObject(foodItemJson);
+                FoodItem selectedFoodItem = new FoodItem(
+                        json.getString("name"),
+                        json.getDouble("calories"),
+                        json.getDouble("gFat"),
+                        json.getDouble("gCarbs"),
+                        json.getDouble("mgSodium"),
+                        json.getDouble("gProtein")
+                );
 
-            caloriesSum += (float) selectedFoodItem.getNutrition()[0];
-            fatSum += (float) selectedFoodItem.getNutrition()[1];
-            carbsSum += (float) selectedFoodItem.getNutrition()[2];
-            sodiumSum += (float) selectedFoodItem.getNutrition()[3];
-            proteinSum += (float) selectedFoodItem.getNutrition()[4];
+                caloriesSum += (float) selectedFoodItem.getNutrition()[0];
+                fatSum += (float) selectedFoodItem.getNutrition()[1];
+                carbsSum += (float) selectedFoodItem.getNutrition()[2];
+                sodiumSum += (float) selectedFoodItem.getNutrition()[3];
+                proteinSum += (float) selectedFoodItem.getNutrition()[4];
 
-            sharedPreferences.edit().putFloat("caloriesSum", caloriesSum).apply();
-            sharedPreferences.edit().putFloat("fatSum", fatSum).apply();
-            sharedPreferences.edit().putFloat("carbsSum", carbsSum).apply();
-            sharedPreferences.edit().putFloat("sodiumSum", sodiumSum).apply();
-            sharedPreferences.edit().putFloat("proteinSum", proteinSum).apply();
+                sharedPreferences.edit().putFloat("caloriesSum", caloriesSum).apply();
+                sharedPreferences.edit().putFloat("fatSum", fatSum).apply();
+                sharedPreferences.edit().putFloat("carbsSum", carbsSum).apply();
+                sharedPreferences.edit().putFloat("sodiumSum", sodiumSum).apply();
+                sharedPreferences.edit().putFloat("proteinSum", proteinSum).apply();
 
-            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("caloriesSum", 0.0F)));
-            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("fatSum", 0.0F)));
-            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("carbsSum", 0.0F)));
-            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("sodiumSum", 0.0F)));
-            Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("proteinSum", 0.0F)));
+                Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("caloriesSum", 0.0F)));
+                Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("fatSum", 0.0F)));
+                Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("carbsSum", 0.0F)));
+                Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("sodiumSum", 0.0F)));
+                Log.d("caloriesSum", String.valueOf(sharedPreferences.getFloat("proteinSum", 0.0F)));
 
-            // display macros on screen
+                // display macros on screen
+                TextView macroDisplay = findViewById(R.id.macroText);
+                macroDisplay.setText("        Macronutrient Info\n\n" +
+                        "   Per serving\n" +
+                        "Calories: " + caloriesSum + "\n" +
+                        "Fat: " + fatSum + " g\n" +
+                        "Carbs: " + carbsSum + " g\n" +
+                        "Sodium: " + sodiumSum + " mg\n" +
+                        "Protein: " + proteinSum + " g");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else if (foodItemJson != null && !foodAdded) {
             TextView macroDisplay = findViewById(R.id.macroText);
             macroDisplay.setText("        Macronutrient Info\n\n" +
                     "   Per serving\n" +
@@ -74,9 +89,15 @@ public class MealActivity extends AppCompatActivity {
                     "Carbs: " + carbsSum + " g\n" +
                     "Sodium: " + sodiumSum + " mg\n" +
                     "Protein: " + proteinSum + " g");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } else {
+            TextView macroDisplay = findViewById(R.id.macroText);
+            macroDisplay.setText("        Macronutrient Info\n\n" +
+                    "   Per serving\n" +
+                    "Calories: 0\n" +
+                    "Fat: 0 g\n" +
+                    "Carbs: 0 g\n" +
+                    "Sodium: 0 mg\n" +
+                    "Protein: 0 g");
         }
 
         // home button handler

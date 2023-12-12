@@ -28,6 +28,8 @@ public class HallActivity extends AppCompatActivity {
     String[] foodNames;
     HashMap<String, List<FoodItem>> stationFoodMap;
     String hallNameRaw;
+    String foodItemJson;
+    boolean foodAdded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,9 @@ public class HallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hall);
         stationList = findViewById(R.id.stationList);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("com.cs407.dormnomnom", Context.MODE_PRIVATE);
+        foodItemJson = sharedPreferences.getString("json", null);
+        foodAdded = getIntent().getBooleanExtra("foodAdded", false);
         hallNameRaw = getIntent().getStringExtra("HALL_NAME");
         String hallName = "";
 
@@ -112,7 +117,7 @@ public class HallActivity extends AppCompatActivity {
                         FoodItem selectedFoodItem = (FoodItem) adapter.getChild(groupPosition, childPosition);
 
                         // Convert FoodItem to JSON string
-                        String foodItemJson = selectedFoodItem.toJsonString();
+                        foodItemJson = selectedFoodItem.toJsonString();
 
                         // Create an Intent to start the FoodActivity
                         Intent intent = new Intent(HallActivity.this, FoodActivity.class);
@@ -142,6 +147,9 @@ public class HallActivity extends AppCompatActivity {
 
     private void navigateToClass(Intent intent) {
         intent.putExtra("HALL_NAME", hallNameRaw);
+        intent.putExtra("json", foodItemJson);
+        if (foodAdded)
+            intent.putExtra("foodAdded", foodAdded);
         startActivity(intent);
         finish();
     }
