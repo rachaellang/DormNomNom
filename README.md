@@ -1,1 +1,5 @@
-Note: Commits from jeffrey-weisinger is Kamila from a different machine
+# DormNomNom
+
+DormNomNom is an Android app designed for students living in [University Housing](https://www.housing.wisc.edu/) at the [University of Wisconsin - Madison](https://wisc.edu/). The app utilizes the [API](https://wisc-housingdining.nutrislice.com/menu) University Housing uses to display the menu at the dining halls. The menu provides nutritional information, and DormNomNom allows users to add food items to meals and keep track of macronutrients. Upon launch, the app also uses location services to automatically show users the closest dining hall.
+
+This was a course-long final project for the CS 407: Foundations of Mobile Systems and Applications at the University of Wisconsin - Madison, taught by Professors Suman Banerjee and Mouna Kacem.
